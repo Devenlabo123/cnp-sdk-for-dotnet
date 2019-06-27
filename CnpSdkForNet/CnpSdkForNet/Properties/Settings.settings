@@ -33,10 +33,10 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="username" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">SDKTEAM12</Value>
     </Setting>
     <Setting Name="password" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">V2b9F4k7</Value>
     </Setting>
     <Setting Name="keepAlive" Type="System.String" Scope="User">
       <Value Profile="(Default)">true</Value>
@@ -54,7 +54,7 @@
       <Value Profile="(Default)">101</Value>
     </Setting>
     <Setting Name="sftpUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">prelive.litle.com</Value>
+      <Value Profile="(Default)">payments.vantivprelive.com</Value>
     </Setting>
     <Setting Name="sftpUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)">DOTNET</Value>
@@ -66,10 +66,10 @@
       <Value Profile="(Default)">false</Value>
     </Setting>
     <Setting Name="vantivPublicKeyId" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">94276408</Value>
     </Setting>
     <Setting Name="pgpPassphrase" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">sdksupport2018</Value>
     </Setting>
     <Setting Name="gnuPgDir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

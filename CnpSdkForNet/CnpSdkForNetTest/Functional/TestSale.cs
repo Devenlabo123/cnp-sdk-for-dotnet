@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Cnp.Sdk.Test.Functional
 {
@@ -70,6 +72,48 @@ namespace Cnp.Sdk.Test.Functional
 
             var responseObj = _cnp.Sale(saleObj);
             StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+        }
+
+
+        [Test]
+        public void SimpleSaleWithTaxTypeIdentifierAsync()
+        {
+            var saleObj = new sale
+            {
+                amount = 106,
+                cnpTxnId = 123456,
+                id = "1",
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000000",
+                    expDate = "1210"
+                },
+                enhancedData = new enhancedData
+                {
+                    customerReference = "000000008110801",
+                    salesTax = 23,
+                    deliveryType = enhancedDataDeliveryType.DIG,
+                    taxExempt = false,
+                    detailTaxes = new List<detailTax>()
+
+
+                }
+            };
+
+            var myDetailTax = new detailTax();
+            myDetailTax.taxIncludedInTotal = true;
+            myDetailTax.taxAmount = 23;
+            myDetailTax.taxTypeIdentifier = taxTypeIdentifierEnum.Item00;
+            myDetailTax.cardAcceptorTaxId = "58-1942497";
+            saleObj.enhancedData.detailTaxes.Add(myDetailTax);
+
+            CancellationToken a = new CancellationToken(true);
+            Task<saleResponse> responseObj = _cnp.SaleAsync(saleObj, a);
+            Console.Write(responseObj.ToString());
+            Assert.AreEqual("Approved", responseObj.Result);
         }
 
         [Test]
@@ -387,10 +431,10 @@ namespace Cnp.Sdk.Test.Functional
                 {
                     preferredLanguage = countryTypeEnum.US
                 },
-                pinlessDebitRequest = new pinlessDebitRequestType { routingPreference = routingPreferenceEnum .pinlessDebitOnly}
+                pinlessDebitRequest = new pinlessDebitRequestType { routingPreference = routingPreferenceEnum.pinlessDebitOnly }
 
             };
-            
+
             var responseObj = _cnp.Sale(saleObj);
             StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
         }

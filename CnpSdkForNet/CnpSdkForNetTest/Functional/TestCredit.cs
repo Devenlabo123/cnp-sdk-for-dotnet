@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
+using System.Threading;
 
 namespace Cnp.Sdk.Test.Functional
 {
@@ -52,6 +53,29 @@ namespace Cnp.Sdk.Test.Functional
 
             var response = _cnp.Credit(creditObj);
             Assert.AreEqual("Approved", response.message);
+        }
+        [Test]
+        public void SimpleCreditWithCardAsync()
+        {
+            var creditObj = new credit
+            {
+                id = "1",
+                reportGroup = "planets",
+                amount = 106,
+                orderId = "2111",
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            };
+
+            CancellationTokenSource source = new CancellationTokenSource();
+            CancellationToken token = source.Token;
+            var response = _cnp.CreditAsync(creditObj,token);
+            Assert.AreEqual("000", response.Result.response);
         }
 
         [Test]
